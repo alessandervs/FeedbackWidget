@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+sander-acer
+sander-acer.pub
 
 # Editor directories and files
 .vscode/*
