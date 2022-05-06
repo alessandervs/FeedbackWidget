@@ -1,0 +1,23 @@
+Primeiro código #NextLevel 
+Segundo código #NeverStopLearning
+Terceiro código
+Quarto código
+Quinto código
+Sexto código
+
+##Comandos SSHkey
+eval "$(ssh-agent -s)"
+ssh-add sander-acer
+
+Boa noite galera! 
+Meu nome é Alessander Victor, 39 anos e sou de Ladário -MS morando em Belo Horizonte - MG.
+Sou formado em Administração de Empresas(UFMS), mas desde sempre trabalhei com TI nas áreas de Suporte e Infra e Atualmente como analista de Negócios de TI em um Hospital. 
+Estou participando da #NLW pela primeira vez, comecei a estudar programação por conta própria à menos de 1 ano e já consegui desenvolver uma aplicação Next+React para o Hospital que trabalho. Espero aprender muito mais aqui com todos vocês.
+Se alguém quiser ampliar as conexões, seguem os meus links:
+Linkedin: https://www.linkedin.com/in/alessandervictor/
+Github: https://github.com/alessandervs
+Boa sorte e todos e bora aprender! :rocket: :rocket: :rocket:
+
+
+dmarry2110@gmail.com
+Ma101322#
