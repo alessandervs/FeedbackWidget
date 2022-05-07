@@ -11,7 +11,7 @@ Colocar recorte no screenshot;
 # Melhorias
 - tema dark e light
 - user um serviço de email, (mailgun)
-- melhorar o html + css do email
+- melhorar o html + css do email template
 - Dashboard
     - Autenticação(OAuth)
 
