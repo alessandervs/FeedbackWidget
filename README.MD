@@ -7,3 +7,12 @@ Salvar no banco Mongo Atlas;
 ## Funcionais
 Colocar botões de nível de satisfação com emoji;
 Colocar recorte no screenshot;
+
+# Melhorias
+- tema dark e light
+- user um serviço de email, (mailgun)
+- melhorar o html + css do email
+- Dashboard
+    - Autenticação(OAuth)
+
+- Validação de campos e erros
