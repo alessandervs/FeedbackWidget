@@ -1,37 +1,47 @@
-import { ArrowLeft, Camera } from "phosphor-react"
+import { ArrowLeft} from "phosphor-react"
 import { FormEvent, useState } from "react";
-import { FeedbackType, feedbackTypes } from ".."
+import { FeedbackType, feedbackTypes, satisfactionTypes, SatisfactionType } from ".."
 import { api } from "../../../lib/api";
 import { CloseButton } from "../../CloseButton"
 import { Loading } from "../../Loading";
 import { ScreenShotButton } from "../ScreenShotButton";
 
 interface FeedbackContentStepProps {
-  feedbackType: FeedbackType
+  feedbackType: FeedbackType;
+  satisfactionType: SatisfactionType
   onFeedbackRestartRequested: ()=> void;
   onFeedbackSent: ()=> void;
+
 }
 
 
-export function FeedbackContentStep({ onFeedbackSent, feedbackType, onFeedbackRestartRequested}: FeedbackContentStepProps){
+export function FeedbackContentStep({
+  onFeedbackSent,
+  feedbackType,
+  satisfactionType,
+  onFeedbackRestartRequested}: FeedbackContentStepProps){
   const feedbackTypeInfo = feedbackTypes[feedbackType]
+  const satisfactionTypeInfo = satisfactionTypes[satisfactionType]
   const [screenshot, setScreenshot] =useState<string | null>(null)
   const [comment, setComment] = useState('')
+  const [satisfactionLevel, setSatisfactionLevel]= useState('')
   const [isSendingFeedback, setIsSendingFeedback] = useState(false)
 
   async function handleSubmitFeedback(event: FormEvent){
     event.preventDefault()
 
     setIsSendingFeedback(true)
-    // console.log({
-    //   screenshot,
-    //   comment,
-    // })
+    console.log({
+      screenshot,
+      comment,
+      satisfactionLevel,
+    })
 
     await api.post('/feedbacks',{
       type: feedbackType,
       comment,
       screenshot,
+      satisfaction:satisfactionLevel,
     })
 
     setIsSendingFeedback(false)
@@ -63,7 +73,23 @@ export function FeedbackContentStep({ onFeedbackSent, feedbackType, onFeedbackRe
       placeholder="Conte com detalhes o que está acontecendo..."
       onChange={event => setComment(event.target.value)}
       />
-    <footer className="flex gap-2 mt-2">
+      <span className="flex mt-2 gap-12 items-center justify-center">
+      {
+           Object.entries(satisfactionTypes).map(([key, value]) =>{
+            return (
+              <button
+                key={key}
+                className="flex flex-col items-center gap-2 w-8 h-8 p-2 bg-brand-500 rounded-md border-transparent hover:bg-brand-300 focus:bg-brand-300 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500"
+                type="button"
+                onClick={()=> setSatisfactionLevel(key as SatisfactionType)}>
+                <img src={value.image.source} alt={value.image.alt}/>
+                <span className="text-xs my-1">{value.image.alt}</span>
+              </button>
+            )
+        })
+      }
+      </span>
+    <footer className="flex gap-2 mt-10">
       <ScreenShotButton
         screenshot={screenshot}
         onScreenshotTook={setScreenshot}

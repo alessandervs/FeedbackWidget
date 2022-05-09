@@ -3,6 +3,12 @@ import { useState } from "react";
 import bugImageUrl from '../../assets/bug.svg'
 import ideaImageUrl from '../../assets/idea.svg'
 import thoughtImageUrl from '../../assets/thought.svg'
+
+import smileyUrl from '../../assets/smiley.svg'
+import smileyStickerUrl from '../../assets/smiley-sticker.svg'
+import smileymehUrl from '../../assets/smiley-meh.svg'
+import smileysadUrl from '../../assets/smiley-sad.svg'
+
 import { FeedbackTypeStep } from "./Steps/FeedbackTypeStep";
 import { FeedbackContentStep } from "./Steps/FeedbackContentStep";
 import { FeedbackSuccessStep } from "./Steps/FeedbackSuccessStep";
@@ -35,15 +41,50 @@ export const feedbackTypes ={
   }
 }
 
+export const satisfactionTypes ={
+  MS: {
+    image:{
+      source: smileyUrl,
+      alt:'Muito Satisfeito'
+    }
+
+  },
+  SA: {
+    image:{
+      source: smileyStickerUrl,
+      alt:'Satisfeito'
+    }
+
+  },
+  NT: {
+    image:{
+      source: smileymehUrl,
+      alt:'Neutro'
+    }
+
+  },
+  IN: {
+    image:{
+      source: smileysadUrl,
+      alt:'Insatisfeito'
+    }
+
+  }
+}
+
 export type FeedbackType = keyof typeof feedbackTypes;
+export type SatisfactionType = keyof typeof satisfactionTypes;
 
 export function WidgetForm(){
   const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
+  const [satisfactionType, setSatisfactionType] = useState<SatisfactionType | null>(null)
   const [feedbackSent, setFeedbackSent] = useState(false)
+  const [satisfactionSent, sentSatisfactionSent] = useState(false)
 
   function handleRestartFeedback(){
     setFeedbackSent(false)
     setFeedbackType(null)
+    setSatisfactionType(null)
   }
 
   return (
@@ -61,6 +102,7 @@ export function WidgetForm(){
             ): (
               <FeedbackContentStep
                 feedbackType={feedbackType}
+                satisfactionType={satisfactionType}
                 onFeedbackRestartRequested={handleRestartFeedback}
                 onFeedbackSent={()=> setFeedbackSent(true)}
               />

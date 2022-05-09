@@ -9,14 +9,15 @@ export const routes = express.Router()
 
 //curl http://localhost:3333/users
 routes.post('/feedbacks', async (req, res) =>{
-  const {type, comment, screenshot,} = req.body
+  const {type, comment, screenshot, satisfaction} = req.body
+  console.log(satisfaction)
 
 try{
   //Instanciar o Prisma e o nodemailer em uma constante 
   const prismaFeedbackRepository = new PrismaFeedbacksRepository()
   const nodemailerMailAdapter = new NodemailerMailAdapter()
 
-    //Passar para o "Submite Use Case" (outros casos de uso) o prismaFeedbackRepository
+    //Passar para o "Submit Use Case" (outros casos de uso) o prismaFeedbackRepository
   const submitFeedbackUseCase = new SubmitFeedbackUseCase(
       prismaFeedbackRepository,
       nodemailerMailAdapter
@@ -26,6 +27,7 @@ try{
       type,
       comment,
       screenshot,
+      satisfaction,
     })
 
     return res.status(201).send()

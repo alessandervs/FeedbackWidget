@@ -14,10 +14,12 @@ datasource db {
 
 model Feedback {
 
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  type       String
-  comment    String
-  screenshot String?
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  type         String
+  comment      String
+  screenshot   String?
+  satisfaction String?
+  createdAt    DateTime @default(now())
 
 
   @@map("feedbacks")
