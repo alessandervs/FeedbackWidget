@@ -22,20 +22,20 @@ export function FeedbackContentStep({
   onFeedbackRestartRequested}: FeedbackContentStepProps){
   const feedbackTypeInfo = feedbackTypes[feedbackType]
   const satisfactionTypeInfo = satisfactionTypes[satisfactionType]
-  const [screenshot, setScreenshot] =useState<string | null>(null)
+  const [screenshot, setScreenshot] = useState<string | null>(null)
   const [comment, setComment] = useState('')
-  const [satisfactionLevel, setSatisfactionLevel]= useState('')
+  const [satisfactionLevel, setSatisfactionLevel]= useState<typeof satisfactionType | null>(null)
   const [isSendingFeedback, setIsSendingFeedback] = useState(false)
 
   async function handleSubmitFeedback(event: FormEvent){
     event.preventDefault()
 
     setIsSendingFeedback(true)
-    console.log({
-      screenshot,
-      comment,
-      satisfactionLevel,
-    })
+    // console.log({
+    //   screenshot,
+    //   comment,
+    //   satisfactionLevel,
+    // })
 
     await api.post('/feedbacks',{
       type: feedbackType,
@@ -96,7 +96,7 @@ export function FeedbackContentStep({
       />
       <button
         type="submit"
-        disabled={comment.length === 0 || isSendingFeedback}
+        disabled={comment.length === 0 && !satisfactionLevel || isSendingFeedback}
         className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"
       >
         { isSendingFeedback? <Loading/> :'Enviar Feedback'}

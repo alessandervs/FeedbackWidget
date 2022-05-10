@@ -77,14 +77,14 @@ export type SatisfactionType = keyof typeof satisfactionTypes;
 
 export function WidgetForm(){
   const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
-  const [satisfactionType, setSatisfactionType] = useState<SatisfactionType | null>(null)
+  const [satisfactionType, setSatisfactionType] = useState('')
   const [feedbackSent, setFeedbackSent] = useState(false)
   const [satisfactionSent, sentSatisfactionSent] = useState(false)
 
   function handleRestartFeedback(){
     setFeedbackSent(false)
     setFeedbackType(null)
-    setSatisfactionType(null)
+    setSatisfactionType('')
   }
 
   return (
@@ -102,7 +102,7 @@ export function WidgetForm(){
             ): (
               <FeedbackContentStep
                 feedbackType={feedbackType}
-                satisfactionType={satisfactionType}
+                satisfactionType={satisfactionType as SatisfactionType}
                 onFeedbackRestartRequested={handleRestartFeedback}
                 onFeedbackSent={()=> setFeedbackSent(true)}
               />
